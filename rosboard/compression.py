@@ -92,7 +92,7 @@ def decode_pcl2(cloud, field_names=None, skip_nans=False, uvs=[]):
             'invalid datatype %d specified for field %s' % (field.datatype, field.name)
         field_np_datatype = _PCL2_DATATYPES_NUMPY_MAP[field.datatype]
         np_struct.append((field.name, field_np_datatype))
-        total_used_bytes += np.nbytes[field_np_datatype]
+        total_used_bytes += np.dtype(field_np_datatype).itemsize
 
     assert cloud.point_step >= total_used_bytes, \
         'error: total byte sizes of fields exceeds point_step'
